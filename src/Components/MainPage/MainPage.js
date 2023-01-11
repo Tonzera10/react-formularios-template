@@ -1,27 +1,16 @@
 import React, { useState } from 'react'
+import useForm from '../../hooks/useForms'
 import { MainContainer, Form, Input } from './styles'
 
 function MainPage() {
-  const [nome, setNome] = useState("")
-  const [idade, setIdade] = useState("")
-  const [email, setEmail] = useState("")
-
-  const onChangeNome = (event) => {
-    setNome(event.target.value)
-  }
-
-  const onChangeIdade = (event) => {
-    setIdade(event.target.value)
-  }
-
-  const onChangeEmail = (event) => {
-    setEmail(event.target.value)
-  }
+  const [formulario, onChangeInputs, clear] = useForm({nome: "", idade: "", email: "", profissao: ""})
 
   const handleClick = (event) => {
     event.preventDefault()
+    clear()
 
-    console.log(`nome: ${nome}, idade: ${idade}, e-mail: ${email} `)
+
+    console.log(`nome: ${formulario.nome}, idade: ${formulario.idade}, e-mail: ${formulario.email}, profissão: ${formulario.profissao} `)
   }
 
   return (
@@ -31,23 +20,33 @@ function MainPage() {
       <Form onSubmit={handleClick}>
         <label htmlFor="nome">Nome:</label>
         <Input 
+          name='nome'
           id="nome"
-          value={nome}
-          onChange={onChangeNome}
+          value={formulario.nome}
+          onChange={onChangeInputs}
         />
 
         <label htmlFor="idade">Idade:</label>
         <Input 
+          name='idade'
           id="idade"
-          value={idade}
-          onChange={onChangeIdade}
+          value={formulario.idade}
+          onChange={onChangeInputs}
         />
 
         <label htmlFor="email">E-mail:</label>
         <Input 
+          name='email'
           id="email"
-          value={email}
-          onChange={onChangeEmail}
+          value={formulario.email}
+          onChange={onChangeInputs}
+        />
+        <label htmlFor="profissao">Profissão:</label>
+        <Input 
+          name='profissao'
+          id="profissao"
+          value={formulario.profissao}
+          onChange={onChangeInputs}
         />
         
         
